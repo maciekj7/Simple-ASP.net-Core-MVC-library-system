@@ -1,0 +1,20 @@
+﻿@model Biblioteka.Models.Reservation
+
+@{
+    ViewData["Title"] = "Rezerwacja";
+}
+
+<h2>Nowa rezerwacja książki</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="bookId">Wybierz ksiązkę</label><br />
+        <select id="bookId" name="bookId" class="form-control">
+            @foreach (var book in ViewBag.AvailableBooks)
+            {
+                <option value="@book.Id">@book.Title - @book.Author</option>
+            }
+        </select>
+    </div> <br />
+    <button type="submit" class="btn btn-primary">Zarezerwuj</button>
+</form>

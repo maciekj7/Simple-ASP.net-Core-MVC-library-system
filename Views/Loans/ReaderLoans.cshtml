@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Biblioteka.Models.Loan>
+
+@{
+    ViewData["Title"] = "Wypożyczenia";
+}
+
+<h2>Twoje wypożyczenia</h2>
+<h6>Uprzejmie prosimy o terminowe zwroty</h6>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Wydawca</th>
+            <th>Data wypożyczenia</th>
+            <th>Data zwrotu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model)
+        {
+            <tr>
+                <td>@loan.Book.Title</td>
+                <td>@loan.Book.Author</td>
+                <td>@loan.Book.Publisher</td>
+                <td>@loan.LoanedAt.ToString("dd.MM.yyyy")</td>
+                <td>@loan.ReturnDueDate.ToString("dd.MM.yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>

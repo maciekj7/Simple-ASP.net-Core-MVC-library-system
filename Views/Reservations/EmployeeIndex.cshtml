@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Biblioteka.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Rezerwacje";
+}
+
+<h2>Rezerwacje Książek</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Książka</th>
+            <th>Autor</th>
+            <th>Wydawca</th>
+            <th>Czytelnik</th>
+            <th>Data Rezerwacji</th>
+            <th>Koniec Rezerwacji</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.Book.Title</td>
+                <td>@reservation.Book.Author</td>
+                <td>@reservation.Book.Publisher</td>
+                <td>@reservation.Reader.Name</td>
+                <td>@reservation.ReservedAt.ToString("dd.MM.yyyy")</td>
+                <td>@reservation.ExpirationDate.ToString("dd.MM.yyyy")</td>
+                <td>
+                    <form asp-action="Loan" asp-route-id="@reservation.Id" method="post">
+                        <button type="submit" class="btn btn-success">Wypożycz</button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@reservation.Id" method="post">
+                        <button type="submit" class="btn btn-danger">Anuluj Rezerwację</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

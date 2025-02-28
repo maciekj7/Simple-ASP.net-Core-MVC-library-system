@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Biblioteka.Models.Loan>
+
+@{
+    ViewData["Title"] = "Wypożyczenia";
+}
+
+<h2>Wypożyczenia</h2>
+
+<p>
+    <a asp-action="Create">Nowe wypożyczenie</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Czytelnik</th>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Wydawca</th>
+            <th>Data wypożyczenia</th>
+            <th>Data zwrotu</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model)
+        {
+            <tr>
+                <td>@loan.Reader.Name</td>
+                <td>@loan.Book.Title</td>
+                <td>@loan.Book.Author</td>
+                <td>@loan.Book.Publisher</td>
+                <td>@loan.LoanedAt.ToString("dd.MM.yyyy")</td>
+                <td>@loan.ReturnDueDate.ToString("dd.MM.yyyy")</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@loan.Id" method="post">
+                        <button type="submit" class="btn btn-danger">Przyjmij zwrot</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

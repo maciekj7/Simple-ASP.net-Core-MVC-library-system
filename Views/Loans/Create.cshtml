@@ -1,0 +1,44 @@
+﻿@model Biblioteka.Models.Loan
+
+@{
+    ViewData["Title"] = "Wypożycz";
+}
+
+<h1>Wypożycz</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label>Książka</label>
+        <select id="bookId" name="bookId" class="form-control">
+        
+            @foreach (var book in ViewBag.AvailableBooks)
+            {
+                <option value="@book.Id">@book.Title - @book.Author</option>
+            }
+        </select>
+            <div class="form-group">
+                <label asp-for="ReaderId" class="control-label"></label>
+                <select asp-for="ReaderId" class ="form-control" asp-items="ViewBag.ReaderId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoanedAt" class="control-label"></label>
+                <input asp-for="LoanedAt" class="form-control" />
+                <span asp-validation-for="LoanedAt" class="text-danger"></span>
+            </div> <br />
+            <div class="form-group">
+                <input type="submit" value="Wypożycz" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Powrót do listy</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Biblioteka.Models.Reservation>
+
+<h2>Twoje rezerwacje</h2>
+
+<p>
+    <a asp-controller="Reservations" asp-action="Create" class="btn btn-primary">Zarezerwuj nową ksiązkę</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Wydawca</th>
+            <th>Kiedy zarezerwowano</th>
+            <th>Koniec rezerwacji</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.Book.Title</td>
+                <td>@reservation.Book.Author</td>
+                <td>@reservation.Book.Publisher</td>
+                <td>@reservation.ReservedAt.ToString("dd.MM.yyyy")</td>
+                <td>@reservation.ExpirationDate.ToString("dd.MM.yyyy")</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@reservation.Id" method="post">
+                        <button type="submit" class="btn btn-danger">Anuluj rezerwację</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

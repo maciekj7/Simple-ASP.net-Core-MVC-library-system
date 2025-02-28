@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Zaloguj";
+}
+
+<h2>Witamy, zaloguj się</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form asp-action="Login" method="post">
+    <div class="form-group">
+        <label>Numer karty</label>
+        <input type="text" name="cardNumber" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Hasło</label>
+        <input type="password" name="password" class="form-control" required />
+    </div> <br />
+    <button type="submit" class="btn btn-primary">Zaloguj</button>
+</form> <br />
+
+<a asp-area="" asp-controller="Account" asp-action="InfoRej">Informacje o rejestracji i odzyskiwaniu hasła...</a>
